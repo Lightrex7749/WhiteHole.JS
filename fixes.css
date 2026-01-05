@@ -312,6 +312,11 @@
     transform: scale(0.95);
 }
 
+/* Hide premium/upgrade button */
+.premium-btn {
+    display: none !important;
+}
+
 /* ================================================================
    IMPROVED SEARCH FILTER BUTTONS
    ================================================================ */
