@@ -134,32 +134,27 @@
         if (!resultsArea) return;
 
         const moodHeader = `
-            <div class="mood-header" style="border-left: 4px solid ${config.color}">
-                <div class="mood-icon" style="background-color: ${config.color}20">
-                    <i class="fa-solid fa-${config.icon}"></i>
-                </div>
-                <div>
-                    <h2>${mood.charAt(0).toUpperCase() + mood.slice(1)} Mix</h2>
-                    <p>${config.description}</p>
-                </div>
+            <div style="margin-bottom: 24px;">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">${mood.charAt(0).toUpperCase() + mood.slice(1)} Mix</h2>
+                <p style="font-size: 14px; color: var(--text-secondary); margin: 0;">${config.description}</p>
             </div>
         `;
 
         const cardsHTML = songs.map(s => `
-            <div class="result-card" onclick="playSong(${JSON.stringify(s).replace(/"/g, '&quot;')})">
-                <div class="card-image-container">
+            <div class="result-card">
+                <div class="card-image-container" onclick="playSong(${JSON.stringify(s).replace(/"/g, '&quot;')})">
                     <img src="${s.album.cover_medium}" class="card-image" loading="lazy" alt="${s.title}">
                     <div class="play-overlay">
                         <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
                     </div>
-                    <div class="card-actions" onclick="event.stopPropagation()">
-                        <button class="action-pill-btn" onclick="addToQueueFromBtn(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Add to Queue">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <button class="action-pill-btn" onclick="toggleFavorite(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Save to Playlist">
-                            <i class="fa-solid fa-heart"></i>
-                        </button>
-                    </div>
+                </div>
+                <div class="card-actions" onclick="event.stopPropagation()">
+                    <button class="action-pill-btn" onclick="addToQueueFromBtn(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Add to Queue">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <button class="action-pill-btn" onclick="toggleFavorite(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Add to Liked">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
                 </div>
                 <h4 class="playing-title">${escapeHtml(s.title)}</h4>
                 <p class="playing-artist">${escapeHtml(s.artist.name)}</p>

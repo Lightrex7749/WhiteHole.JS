@@ -287,9 +287,9 @@ body {
     flex-direction: column;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(139, 92, 246, 0.1);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
 }
 
 .mood-title {
@@ -298,7 +298,6 @@ body {
     color: var(--text-subdued);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .mood-tags {
@@ -309,8 +308,8 @@ body {
 
 .mood-tag {
     padding: 10px 12px;
-    background: linear-gradient(135deg, var(--bg-highlight), rgba(139, 92, 246, 0.1));
-    border: 1.5px solid transparent;
+    background: var(--bg-highlight);
+    border: 1.5px solid var(--border-subtle);
     border-radius: var(--radius-full);
     font-size: 11px;
     font-weight: 600;
@@ -319,50 +318,33 @@ body {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
 }
 
-.mood-tag::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent);
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.4s ease;
-}
-
-.mood-tag:hover::before {
-    opacity: 1;
-    transform: scale(1);
-}
-
 .mood-tag:hover {
-    background: linear-gradient(135deg, var(--bg-press), rgba(139, 92, 246, 0.2));
+    background: var(--bg-press);
     color: var(--text-primary);
-    transform: translateY(-3px) scale(1.05);
     border-color: var(--accent-purple);
-    box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
 }
 
 .mood-tag.mood-active {
-    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    background: var(--accent-purple);
     color: white;
-    border-color: white;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    border-color: var(--accent-purple);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
 .mood-tag i {
     font-size: 13px;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .mood-tag:hover i {
-    transform: scale(1.2) rotate(10deg);
+    transform: scale(1.1);
 }
 
 .mood-tooltip {
@@ -546,7 +528,7 @@ body {
     max-height: 500px;
     overflow-y: auto;
     z-index: 1000;
-    display: none;
+    display: none !important;
     animation: dropdownSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
 }
@@ -1395,29 +1377,33 @@ body {
 }
 
 .queue-control-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-md);
-    background: transparent;
-    color: var(--text-secondary);
+    background: rgba(255, 50, 50, 0.2);
+    color: #ff5555;
+    border: none;
     transition: all 0.2s ease;
-    opacity: 0;
+    cursor: pointer;
     position: relative;
-    z-index: 1;
+    z-index: 10;
     font-size: 14px;
+    flex-shrink: 0;
 }
 
 .queue-item:hover .queue-control-btn {
     opacity: 1;
+    background: rgba(255, 50, 50, 0.35);
+    color: #ff5555;
 }
 
 .queue-control-btn:hover {
-    background: rgba(255, 0, 0, 0.15);
-    color: #ff4444;
-    transform: scale(1.1);
+    background: rgba(255, 50, 50, 0.5);
+    color: #ff0000;
+    transform: scale(1.15);
 }
 
 .queue-control-btn:active {

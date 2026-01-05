@@ -12,7 +12,10 @@ function initializeSearch() {
     const input = document.querySelector('.searchInput');
     const dropdown = document.getElementById('search-suggestions');
 
-    if (!input) return;
+    if (!input || !dropdown) return;
+
+    // Always hide dropdown by default
+    dropdown.style.display = 'none !important';
 
     input.addEventListener('input', debounce(async (e) => {
         const query = e.target.value.trim();
@@ -24,7 +27,6 @@ function initializeSearch() {
         const data = await fetchFromDeezer(`/search?q=${encodeURIComponent(query)}&limit=25`);
         if (data && data.length > 0) {
             renderSearchResults(data);
-            showMiniSuggestions(data.slice(0, 5));
         }
     }, 400));
 
@@ -47,16 +49,8 @@ async function fetchFromDeezer(endpoint) {
 
 function showMiniSuggestions(songs) {
     const dropdown = document.getElementById('search-suggestions');
-    dropdown.innerHTML = songs.map(s => `
-        <div class="suggestion-item" onclick="playSong(${JSON.stringify(s).replace(/"/g, '&quot;')})">
-            <img src="${s.album.cover_small}" alt="">
-            <div class="s-info">
-                <div class="s-title">${s.title}</div>
-                <div class="s-artist">${s.artist.name}</div>
-            </div>
-        </div>
-    `).join('');
-    dropdown.style.display = 'block';
+    // Keep dropdown hidden by default
+    dropdown.style.display = 'none';
 }
 
 /**
