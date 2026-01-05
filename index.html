@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="WhiteHole - A beautiful, fast, and modern music streaming app">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WhiteHole">
+  <title>WhiteHole | Pro Music</title>
+  <link rel="icon" href="img/whitehole.svg">
+  <link rel="apple-touch-icon" href="img/whitehole.svg">
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Modern Loader -->
+  <div id="whitehole-loader" class="preloader">
+    <div class="loader-content">
+      <div class="loader-pulse">
+        <img src="img/whitehole.svg" alt="logo" class="loader-logo">
+      </div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar-fill"></div>
+      </div>
+      <p class="loader-status">Loading your music experience...</p>
+    </div>
+  </div>
+
+  <div id="main-app" class="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-section">
+          <img src="img/whitehole.svg" alt="WhiteHole" class="logo-icon">
+          <span class="logo-text">WhiteHole</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-group">
+          <button class="nav-item active" data-section="trending">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </button>
+          <button class="nav-item" data-section="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Your Library</div>
+          <button class="nav-item" data-section="liked-songs">
+            <i class="fa-solid fa-heart"></i>
+            <span>Liked Songs</span>
+          </button>
+          <button class="nav-item" data-section="recently-played">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Recently Played</span>
+          </button>
+          <button class="nav-item" data-section="artists">
+            <i class="fa-solid fa-user-music"></i>
+            <span>Artists</span>
+          </button>
+          <button class="nav-item" data-section="albums">
+            <i class="fa-solid fa-compact-disc"></i>
+            <span>Albums</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Playlists</div>
+          <button class="nav-item">
+            <i class="fa-solid fa-plus"></i>
+            <span>Create Playlist</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mood-section">
+          <div class="mood-title">Quick Moods</div>
+          <div class="mood-tags">
+            <button class="mood-tag" data-mood="chill">
+              <i class="fa-solid fa-cloud"></i> Chill
+            </button>
+            <button class="mood-tag" data-mood="energy">
+              <i class="fa-solid fa-bolt"></i> Energy
+            </button>
+            <button class="mood-tag" data-mood="focus">
+              <i class="fa-solid fa-brain"></i> Focus
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Top Navigation Bar -->
+      <header class="top-bar">
+        <div class="nav-arrows">
+          <button class="nav-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="nav-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" class="searchInput" placeholder="What do you want to listen to?">
+          <div id="search-suggestions" class="suggestions-dropdown"></div>
+        </div>
+
+        <div class="user-controls">
+          <button class="premium-btn">
+            <i class="fa-solid fa-crown"></i>
+            <span>Upgrade</span>
+          </button>
+          <button class="user-profile">
+            <i class="fa-solid fa-user"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Container -->
+      <main class="content-container">
+        <div class="content-header">
+          <h1 class="section-title">Good Evening</h1>
+        </div>
+        
+        <div id="results-area" class="music-grid">
+          <!-- Songs Load Here -->
+        </div>
+      </main>
+    </div>
+
+    <!-- Right Sidebar (Queue/Lyrics) -->
+    <aside class="right-sidebar">
+      <div class="right-sidebar-header">
+        <button class="tab-btn active" data-tab="queue">
+          <i class="fa-solid fa-list"></i>
+          <span>Queue</span>
+        </button>
+        <button class="tab-btn" data-tab="lyrics">
+          <i class="fa-solid fa-music"></i>
+          <span>Lyrics</span>
+        </button>
+      </div>
+
+      <div class="right-sidebar-content">
+        <div id="queue-panel" class="panel active">
+          <div class="queue-header">
+            <h3>Up Next</h3>
+            <button class="clear-queue">Clear</button>
+          </div>
+          <div class="queue-list"></div>
+        </div>
+        
+        <div id="lyrics-panel" class="panel">
+          <div class="lyrics-container">
+            <div class="lyrics-empty">
+              <i class="fa-solid fa-music"></i>
+              <p>Lyrics appear here when playing</p>
+            </div>
+            <div class="lyrics-viewer">
+              <!-- Lyrics content -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Bottom Player Controls -->
+    <footer class="player-bar">
+      <div class="player-left">
+        <div class="now-playing">
+          <div class="track-artwork">
+            <img src="" alt="" class="current-art playing-logo">
+          </div>
+          <div class="track-info">
+            <div class="track-name playing-title">Select a track</div>
+            <div class="track-artist playing-artist">Artist name</div>
+          </div>
+          <button id="heart-btn" class="action-btn like-btn">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="player-center">
+        <div class="player-controls">
+          <button class="control-btn shuffle-btn" onclick="toggleShuffle()">
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <button class="control-btn prev-btn" onclick="playPrevious()">
+            <i class="fa-solid fa-step-backward"></i>
+          </button>
+          <button class="control-btn play-btn" id="play-btn" onclick="togglePlayPause()">
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <button class="control-btn next-btn" onclick="playNext()">
+            <i class="fa-solid fa-step-forward"></i>
+          </button>
+          <button class="control-btn repeat-btn" onclick="toggleRepeat()">
+            <i class="fa-solid fa-repeat"></i>
+          </button>
+        </div>
+        
+        <div class="progress-bar-container">
+          <span class="time-current" id="current-time">0:00</span>
+          <div class="progress-track">
+            <div class="progress-filled slider-fill"></div>
+            <input type="range" class="progress-slider" min="0" max="100" value="0">
+            <div class="progress-thumb"></div>
+          </div>
+          <span class="time-total" id="total-time">0:00</span>
+        </div>
+      </div>
+
+      <div class="player-right">
+        <button class="action-btn youtube-btn">
+          <i class="fa-brands fa-youtube"></i>
+        </button>
+        <div class="volume-control">
+          <button class="action-btn volume-btn">
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+          <div class="volume-slider-container">
+            <div class="volume-track">
+              <div class="volume-filled slider-fill" style="width: 50%"></div>
+              <input type="range" class="volume-slider" min="0" max="100" value="50">
+            </div>
+          </div>
+        </div>
+        <button class="action-btn fullscreen-btn">
+          <i class="fa-solid fa-expand"></i>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="notification-msg"></div>
+
+  <!-- Script Loader -->
+  <script src="local-storage.js"></script>
+  <script src="queue-management.js"></script>
+  <script src="playlist-cache.js"></script>
+  <script src="theme-switcher.js"></script>
+  <script src="performance-optimizer.js"></script>
+  <script src="core-player.js"></script>
+  <script src="search-api.js"></script>
+  <script src="advanced-features.js"></script>
+  <script src="ui-effects.js"></script>
+  <script src="ui-navigation.js"></script>
+  <script src="suggestions.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      console.log('🎵 WhiteHole Loading...');
+      const loader = document.getElementById('whitehole-loader');
+      const app = document.getElementById('main-app');
+      const fill = document.querySelector('.loader-bar-fill');
+      
+      console.log('Elements:', { loader, app, fill });
+      
+      let p = 0;
+      const interval = setInterval(() => {
+        p += 10;
+        if(p >= 100) {
+          p = 100;
+          clearInterval(interval);
+          console.log('✅ Loading complete, initializing...');
+          setTimeout(() => {
+            // Force initialize everything
+            if(typeof initializeWhiteholeStorage === 'function') initializeWhiteholeStorage();
+            if(typeof initializeSearch === 'function') initializeSearch();
+            if(typeof loadEntrySuggestions === 'function') loadEntrySuggestions();
+            
+            console.log('🎨 Showing app...');
+            // Fade out loader
+            loader.style.opacity = '0';
+            setTimeout(() => { 
+              loader.style.display = 'none';
+              // Show app with loaded class
+              app.classList.add('loaded');
+              console.log('✨ App visible! Classes:', app.className);
+            }, 500);
+          }, 400);
+        }
+        fill.style.width = p + '%';
+      }, 100);
+    });
+
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => {
+            console.log('✅ Service Worker registered successfully');
+            
+            // Check for updates
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  showNotification('New version available! Refresh to update.', 'info');
+                }
+              });
+            });
+          })
+          .catch(err => console.warn('Service Worker registration failed:', err));
+      });
+    }
+
+    // Install prompt for PWA
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('📦 App is installable');
+    });
+  </script>
+</body>
+</html>

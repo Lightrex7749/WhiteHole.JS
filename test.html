@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhiteHole Test</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Quick test styles */
+    .test-visible {
+      border: 3px solid red !important;
+    }
+    .sidebar { background: #1a1a1a !important; }
+    .main-content { background: #0a0a0a !important; }
+    .right-sidebar { background: #1a1a1a !important; }
+    .player-bar { background: #2a2a2a !important; }
+  </style>
+</head>
+<body>
+  <div class="app-shell loaded test-visible" style="opacity: 1 !important; visibility: visible !important;">
+    <aside class="sidebar test-visible">
+      <div style="padding: 20px; color: white;">
+        <h2>SIDEBAR</h2>
+        <p>If you see this, the sidebar is visible</p>
+      </div>
+    </aside>
+
+    <div class="main-content test-visible">
+      <div style="padding: 20px; color: white;">
+        <h1>MAIN CONTENT</h1>
+        <p>If you see this, the main area is visible</p>
+      </div>
+    </div>
+
+    <aside class="right-sidebar test-visible">
+      <div style="padding: 20px; color: white;">
+        <h2>RIGHT SIDEBAR</h2>
+        <p>If you see this, the right sidebar is visible</p>
+      </div>
+    </aside>
+
+    <footer class="player-bar test-visible">
+      <div style="color: white;">
+        <p>PLAYER BAR - If you see this, the player is visible</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
