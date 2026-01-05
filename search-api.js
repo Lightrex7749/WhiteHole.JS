@@ -31,6 +31,11 @@ function initializeSearch() {
             return;
         }
 
+        // Track search in language preferences
+        if (window.languagePrefs) {
+            window.languagePrefs.addToSearchHistory(query);
+        }
+
         const data = await fetchFromDeezer(`/search?q=${encodeURIComponent(query)}&limit=25`);
         if (data && data.length > 0) {
             renderSearchResults(data);
@@ -91,11 +96,22 @@ function renderSearchResults(songs) {
 }
 
 /**
- * Entry Suggestions
+ * Entry Suggestions - Now language-aware
  */
 async function loadEntrySuggestions() {
-    const defaultQueries = ['trending 2025', 'top hits', 'new releases', 'chill vibes'];
-    const query = defaultQueries[Math.floor(Math.random() * defaultQueries.length)];
+    // Language-aware default queries
+    const queries = {
+        en: ['trending 2025', 'top hits', 'new releases', 'chill vibes', 'party songs'],
+        es: ['tendencias 2025', 'éxitos populares', 'lanzamientos nuevos', 'vibes relajantes'],
+        fr: ['tendances 2025', 'grands succès', 'nouvelles sorties', 'ambiance chille'],
+        de: ['trends 2025', 'top hits', 'neue veröffentlichungen', 'entspannungsvibes'],
+        it: ['tendenze 2025', 'grandi successi', 'nuove uscite', 'vibes rilassanti'],
+        pt: ['tendências 2025', 'maiores sucessos', 'novos lançamentos', 'vibes relaxantes']
+    };
+    
+    const lang = window.languagePrefs?.currentLanguage || 'en';
+    const langQueries = queries[lang] || queries.en;
+    const query = langQueries[Math.floor(Math.random() * langQueries.length)];
     const data = await fetchFromDeezer(`/search?q=${encodeURIComponent(query)}&limit=25`);
     renderSearchResults(data);
 }

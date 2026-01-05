@@ -88,14 +88,20 @@
      */
     async function loadMoodPlaylist(mood, config) {
         try {
-            // Use the first keyword for search
-            const query = config.keywords[0];
-            const results = await searchByMood(query, mood);
+            // Use language preference to enhance search
+            const enhancedQuery = window.languagePrefs ? 
+                window.languagePrefs.enhanceSearchQuery(mood) : 
+                config.keywords[0];
+            const results = await searchByMood(enhancedQuery, mood);
             
             if (results && results.length > 0) {
                 displayMoodResults(results, mood, config);
                 // Switch to search view
                 switchSection('search');
+                // Track in language preferences
+                if (window.languagePrefs) {
+                    window.languagePrefs.addToSearchHistory(mood);
+                }
             }
         } catch (err) {
             console.error('Error loading mood playlist:', err);
