@@ -8,6 +8,13 @@ const API_HEADERS = {
     'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
 };
 
+// Escape HTML special characters
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function initializeSearch() {
     const input = document.querySelector('.searchInput');
     const dropdown = document.getElementById('search-suggestions');
@@ -60,24 +67,25 @@ function renderSearchResults(songs) {
     const area = document.getElementById('results-area');
     if (!area) return;
 
+    area.className = 'cards-grid';
     area.innerHTML = songs.map(s => `
-        <div class="result-card" onclick="playSong(${JSON.stringify(s).replace(/"/g, '&quot;')})">
-            <div class="card-image-container">
+        <div class="result-card">
+            <div class="card-image-container" onclick="playSong(${JSON.stringify(s).replace(/"/g, '&quot;')})">
                 <img src="${s.album.cover_medium}" class="card-image" loading="lazy">
                 <div class="play-overlay">
                     <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
                 </div>
-                <div class="card-actions" onclick="event.stopPropagation()">
-                    <button class="action-pill-btn" onclick="addToQueueFromBtn(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Add to Queue">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <button class="action-pill-btn" onclick="toggleFavorite(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Save to Playlist">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-                </div>
             </div>
-            <h4 class="playing-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${s.title}</h4>
-            <p class="playing-artist">${s.artist.name}</p>
+            <div class="card-actions" onclick="event.stopPropagation()">
+                <button class="action-pill-btn" onclick="addToQueueFromBtn(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Add to Queue">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <button class="action-pill-btn" onclick="toggleFavorite(${JSON.stringify(s).replace(/"/g, '&quot;')})" title="Add to Liked">
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+            </div>
+            <h4 class="playing-title">${escapeHtml(s.title)}</h4>
+            <p class="playing-artist">${escapeHtml(s.artist.name)}</p>
         </div>
     `).join('');
 }

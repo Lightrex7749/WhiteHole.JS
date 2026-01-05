@@ -190,7 +190,7 @@ if (window.queueManagementLoaded) {
                 return `
                     <div class="queue-item ${isPlaying ? 'playing' : ''}" onclick="window.playFromQueue(${index})">
                         <div class="playing-indicator">
-                            <i class="fa-solid fa-play"></i>
+                            ${isPlaying ? '<i class="fa-solid fa-music"></i>' : '<span style="font-size:10px;font-weight:bold;">${index + 1}</span>'}
                         </div>
                         <img src="${cover}" alt="${song.title}" style="width:40px;height:40px;border-radius:4px;object-fit:cover;">
                         <div class="queue-item-info">

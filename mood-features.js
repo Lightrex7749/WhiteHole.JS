@@ -134,8 +134,8 @@
         if (!resultsArea) return;
 
         const moodHeader = `
-            <div style="margin-bottom: 24px;">
-                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">${mood.charAt(0).toUpperCase() + mood.slice(1)} Mix</h2>
+            <div style="grid-column: 1 / -1; margin-bottom: 24px;">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">🎵 ${mood.charAt(0).toUpperCase() + mood.slice(1)} Mix</h2>
                 <p style="font-size: 14px; color: var(--text-secondary); margin: 0;">${config.description}</p>
             </div>
         `;
@@ -161,7 +161,8 @@
             </div>
         `).join('');
 
-        resultsArea.innerHTML = moodHeader + `<div class="cards-grid">${cardsHTML}</div>`;
+        resultsArea.classList.add('cards-grid');
+        resultsArea.innerHTML = moodHeader + cardsHTML;
 
         // Scroll to results
         setTimeout(() => {
