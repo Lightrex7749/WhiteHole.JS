@@ -1,0 +1,158 @@
+/* =============================================================================
+   SEARCH FILTERS & RESULTS - SPOTIFY-STYLE
+   ============================================================================= */
+
+.search-filters {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--spacing-xl);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background: var(--bg-highlight);
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.filter-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.4s ease;
+}
+
+.filter-btn:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.filter-btn:hover {
+    background: var(--bg-press);
+    color: var(--text-primary);
+    border-color: var(--accent-purple);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+.filter-active {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    color: white;
+    border-color: white;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+.filter-active:hover {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+}
+
+.filter-btn i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.filter-btn:hover i {
+    transform: scale(1.15);
+}
+
+/* Search sections */
+.search-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.search-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+}
+
+.search-section-title i {
+    color: var(--accent-purple);
+    font-size: 20px;
+}
+
+/* Artist card special styling */
+.artist-card .card-image-container {
+    border-radius: var(--radius-xl);
+}
+
+.artist-image {
+    border-radius: var(--radius-xl) !important;
+    object-fit: cover;
+}
+
+.artist-fans {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.artist-fans i {
+    color: var(--accent-purple);
+    font-size: 11px;
+}
+
+/* Album year */
+.album-year {
+    font-size: 12px;
+    color: var(--text-subdued);
+    margin-top: 2px;
+}
+
+/* No results */
+.no-results {
+    grid-column: 1 / -1;
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--text-subdued);
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-filters {
+        overflow-x: auto;
+        padding-bottom: var(--spacing-md);
+    }
+
+    .search-filters::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .search-filters::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .search-filters::-webkit-scrollbar-thumb {
+        background: rgba(139, 92, 246, 0.3);
+        border-radius: 2px;
+    }
+
+    .filter-btn {
+        flex-shrink: 0;
+    }
+}
