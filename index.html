@@ -281,6 +281,24 @@
   <!-- Lazy Loader (Load First!) -->
   <script src="lazy-loader.js"></script>
 
+  <!-- Global Notification System (Initialize First!) -->
+  <script>
+    window.showNotification = function(message, type = 'info') {
+      const container = document.querySelector('.notification-msg');
+      if (!container) return;
+      
+      // Clear previous notifications
+      container.innerHTML = '';
+      container.textContent = message;
+      container.className = `notification-msg show notification-${type}`;
+      
+      // Auto-hide after 3 seconds
+      setTimeout(() => {
+        container.classList.remove('show');
+      }, 3000);
+    };
+  </script>
+
   <!-- Critical Scripts (Loaded Immediately) -->
   <script src="local-storage.js"></script>
   <script src="queue-management.js"></script>

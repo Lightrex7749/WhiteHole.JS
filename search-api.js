@@ -29,25 +29,6 @@ function initializeSearch() {
     // Don't duplicate search event handling - advanced-search.js handles it
     // This is kept for any legacy code that depends on it
 }
-            return;
-        }
-
-        // Track search in language preferences
-        if (window.languagePrefs) {
-            window.languagePrefs.addToSearchHistory(query);
-        }
-
-        const data = await fetchFromDeezer(`/search?q=${encodeURIComponent(query)}&limit=25`);
-        if (data && data.length > 0) {
-            renderSearchResults(data);
-        }
-    }, 400));
-
-    // Close dropdown on outside click
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-bar') && !e.target.closest('.command-box')) dropdown.style.display = 'none';
-    });
-}
 
 async function fetchFromDeezer(endpoint) {
     try {

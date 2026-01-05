@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhiteHole Function Availability Test</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test { margin: 10px 0; }
+        .pass { color: #1db954; }
+        .fail { color: #ef4444; }
+        .pending { color: #f59e0b; }
+    </style>
+</head>
+<body>
+    <h1>WhiteHole Function Availability Test</h1>
+    <div id="results"></div>
+
+    <script>
+        const results = [];
+
+        function test(name, fn) {
+            try {
+                const result = fn();
+                const status = result ? 'pass' : 'fail';
+                results.push({ name, status, message: result ? 'OK' : 'Failed' });
+                console.log(`[${status.toUpperCase()}] ${name}`);
+            } catch (e) {
+                results.push({ name, status: 'fail', message: e.message });
+                console.error(`[FAIL] ${name}: ${e.message}`);
+            }
+        }
+
+        // Test global notification system
+        test('Global showNotification exists', () => typeof window.showNotification === 'function');
+        
+        // These will be checked after script loads
+        window.addEventListener('load', () => {
+            test('playSong function available', () => typeof window.playSong === 'function');
+            test('addToGlobalQueue function available', () => typeof window.addToGlobalQueue === 'function');
+            test('toggleFavorite function available', () => typeof window.toggleFavorite === 'function');
+            test('languagePrefs object available', () => typeof window.languagePrefs === 'object');
+            test('languagePrefs.enhanceSearchQuery available', () => typeof window.languagePrefs?.enhanceSearchQuery === 'function');
+            test('initAdvancedSearch function available', () => typeof window.initAdvancedSearch === 'function');
+            test('initializeSearch function available', () => typeof window.initializeSearch === 'function');
+            test('loadEntrySuggestions function available', () => typeof window.loadEntrySuggestions === 'function');
+
+            // Display results
+            const resultsDiv = document.getElementById('results');
+            results.forEach(r => {
+                const div = document.createElement('div');
+                div.className = `test ${r.status}`;
+                div.textContent = `[${r.status.toUpperCase()}] ${r.name}: ${r.message}`;
+                resultsDiv.appendChild(div);
+            });
+
+            const summary = document.createElement('div');
+            summary.style.marginTop = '20px';
+            summary.style.fontSize = '16px';
+            const passed = results.filter(r => r.status === 'pass').length;
+            const failed = results.filter(r => r.status === 'fail').length;
+            summary.innerHTML = `<strong>Results:</strong> ${passed} passed, ${failed} failed`;
+            resultsDiv.appendChild(summary);
+        });
+    </script>
+
+    <!-- Load critical scripts in order -->
+    <script src="lazy-loader.js"></script>
+    <script src="local-storage.js"></script>
+    <script src="queue-management.js"></script>
+    <script src="playlist-cache.js"></script>
+    <script src="language-preferences.js"></script>
+    <script src="memory-optimizer.js"></script>
+    <script src="core-player.js"></script>
+    <script src="advanced-search.js"></script>
+    <script src="search-api.js"></script>
+    <script src="advanced-features.js" defer></script>
+    <script src="mood-features.js" defer></script>
+</body>
+</html>
