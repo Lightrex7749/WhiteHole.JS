@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="search-filters.css">
+  <link rel="stylesheet" href="spotify-style.css">
 </head>
 <body>
   <!-- Modern Loader -->
@@ -43,7 +44,7 @@
 
       <nav class="nav-menu">
         <div class="nav-group">
-          <button class="nav-item active" data-section="trending">
+          <button class="nav-item active" data-section="trending" onclick="loadDiscoverContent()">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
           </button>
@@ -51,25 +52,29 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Search</span>
           </button>
+          <button class="nav-item" data-section="browse" onclick="loadGenres()">
+            <i class="fa-solid fa-compact-disc"></i>
+            <span>Browse</span>
+          </button>
         </div>
 
         <div class="nav-group">
           <div class="nav-group-title">Your Library</div>
-          <button class="nav-item" data-section="liked-songs">
+          <button class="nav-item" data-section="liked-songs" onclick="loadLikedSongs()">
             <i class="fa-solid fa-heart"></i>
             <span>Liked Songs</span>
           </button>
-          <button class="nav-item" data-section="recently-played">
+          <button class="nav-item" data-section="recently-played" onclick="loadRecentlyPlayed()">
             <i class="fa-solid fa-clock-rotate-left"></i>
             <span>Recently Played</span>
           </button>
           <button class="nav-item" data-section="artists">
             <i class="fa-solid fa-user-music"></i>
-            <span>Artists</span>
+            <span>Top Artists</span>
           </button>
           <button class="nav-item" data-section="albums">
             <i class="fa-solid fa-compact-disc"></i>
-            <span>Albums</span>
+            <span>Top Tracks</span>
           </button>
         </div>
 
@@ -282,6 +287,7 @@
   <script src="performance-optimizer.js"></script>
   <script src="mood-features.js"></script>
   <script src="search-filters.js"></script>
+  <script src="spotify-features.js"></script>
   <script src="core-player.js"></script>
   <script src="search-api.js"></script>
   <script src="advanced-features.js"></script>
