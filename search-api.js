@@ -16,6 +16,8 @@ function escapeHtml(text) {
 }
 
 function initializeSearch() {
+    // Note: Advanced search system (advanced-search.js) now handles the main search
+    // This function kept for backward compatibility and dropdown mini-suggestions
     const input = document.querySelector('.searchInput');
     const dropdown = document.getElementById('search-suggestions');
 
@@ -24,10 +26,9 @@ function initializeSearch() {
     // Always hide dropdown by default
     dropdown.style.display = 'none !important';
 
-    input.addEventListener('input', debounce(async (e) => {
-        const query = e.target.value.trim();
-        if (!query) {
-            dropdown.style.display = 'none';
+    // Don't duplicate search event handling - advanced-search.js handles it
+    // This is kept for any legacy code that depends on it
+}
             return;
         }
 

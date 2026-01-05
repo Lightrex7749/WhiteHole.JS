@@ -312,3 +312,109 @@
     transform: scale(0.95);
 }
 
+/* ================================================================
+   IMPROVED SEARCH FILTER BUTTONS
+   ================================================================ */
+
+.search-filters {
+    display: none !important;
+    gap: var(--spacing-sm) !important;
+    padding: var(--spacing-lg) 0 !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    margin-bottom: var(--spacing-lg) !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    scroll-behavior: smooth;
+    animation: slideDown 0.3s ease;
+}
+
+.search-filters.active {
+    display: flex !important;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-btn {
+    padding: 10px 18px;
+    background: transparent;
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-btn i {
+    font-size: 12px;
+}
+
+.filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    background: var(--bg-highlight);
+}
+
+.filter-btn.filter-active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+}
+
+.filter-btn.filter-active:hover {
+    box-shadow: 0 6px 16px rgba(29, 185, 84, 0.4);
+}
+
+/* ================================================================
+   SEARCH SECTION STYLING
+   ================================================================ */
+
+.search-section-header {
+    grid-column: 1 / -1;
+    margin-bottom: 16px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.search-section-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text-primary);
+}
+
+.search-section-header p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.no-results i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
