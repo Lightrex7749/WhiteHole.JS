@@ -278,22 +278,27 @@
 
   <div class="notification-msg"></div>
 
-  <!-- Script Loader -->
-  <script src="advanced-performance.js"></script>
+  <!-- Lazy Loader (Load First!) -->
+  <script src="lazy-loader.js"></script>
+
+  <!-- Critical Scripts (Loaded Immediately) -->
   <script src="local-storage.js"></script>
   <script src="queue-management.js"></script>
   <script src="playlist-cache.js"></script>
   <script src="theme-switcher.js"></script>
-  <script src="performance-optimizer.js"></script>
-  <script src="mood-features.js"></script>
-  <script src="search-filters.js"></script>
-  <script src="spotify-features.js"></script>
+  <script src="memory-optimizer.js"></script>
   <script src="core-player.js"></script>
   <script src="search-api.js"></script>
-  <script src="advanced-features.js"></script>
-  <script src="ui-effects.js"></script>
-  <script src="ui-navigation.js"></script>
-  <script src="suggestions.js"></script>
+
+  <!-- Deferred Scripts (Loaded After Page Ready) -->
+  <script src="advanced-performance.js" defer></script>
+  <script src="performance-optimizer.js" defer></script>
+  <script src="advanced-features.js" defer></script>
+  <script src="ui-effects.js" defer></script>
+  <script src="ui-navigation.js" defer></script>
+
+  <!-- Lazy Loaded on Demand -->
+  <!-- mood-features.js, search-filters.js, spotify-features.js, suggestions.js -->
 
   <script>
     window.addEventListener('load', () => {
